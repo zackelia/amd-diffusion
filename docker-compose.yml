@@ -1,0 +1,18 @@
+services:
+  amd-diffusion:
+    image: ghcr.io/zackelia/amd-diffusion:0.1.0
+    container_name: amd-diffusion
+    restart: unless-stopped
+    ports:
+      - "7860:7860"
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/kfd:/dev/kfd
+    volumes:
+      - ./models:/sd/models
+    # To check if you need this environment variable, check README.md.
+    # environment:
+      # - "HSA_OVERRIDE_GFX_VERSION=10.3.0"
+    # To check if you need to (or should) add extra arguments, check README.md.
+    # command: --upcast-sampling
+
