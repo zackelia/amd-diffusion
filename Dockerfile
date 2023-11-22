@@ -1,4 +1,4 @@
-FROM rocm/dev-ubuntu-22.04:5.7
+FROM rocm/dev-ubuntu-22.04:5.7 AS builder
 
 ENV STABLE_DIFFUSION_RELEASE v1.6.0
 
@@ -20,6 +20,14 @@ RUN git clone --depth=1 --branch ${STABLE_DIFFUSION_RELEASE} https://github.com/
     # For some reason `--exit` will do all the other git/pip dependencies/updates
     # Need `--skip-torch-cuda-test` because the driver devices aren't in the builder image
     /venv/bin/python /sd/launch.py --exit --skip-torch-cuda-test
+
+# Multi-stage build shaves off ~2.5GB
+FROM rocm/dev-ubuntu-22.04:5.7
+
+COPY --from=builder /venv /venv
+COPY --from=builder /sd /sd
+
+RUN apt-get update && apt-get install git -y
 
 WORKDIR /sd
 EXPOSE 7860
