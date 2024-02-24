@@ -9,13 +9,13 @@ Install amdgpu driver with ROCm 6.0.2 support. Download at https://www.amd.com/e
 Instructions adapted from https://amdgpu-install.readthedocs.io/en/latest/install-installing.html
 
 ```
-sudo apt install amdgpu-install_6.0.60002-1_all.deb
+sudo apt install ./amdgpu-install_6.0.60002-1_all.deb
 amdgpu-install -y --accept-eula --usecase=rocm
 sudo usermod -a -G render $LOGNAME
 sudo usermod -a -G video $LOGNAME
 ```
 
-Reboot for changes to take affect.
+Reboot for changes to take effect.
 
 ## Usage
 
