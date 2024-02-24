@@ -1,6 +1,6 @@
 services:
   amd-diffusion:
-    image: ghcr.io/zackelia/amd-diffusion:0.1.0
+    image: ghcr.io/zackelia/amd-diffusion:0.2.0
     container_name: amd-diffusion
     restart: unless-stopped
     ports:
